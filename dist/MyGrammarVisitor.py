@@ -14,6 +14,11 @@ class MyGrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by MyGrammarParser#single_statement.
+    def visitSingle_statement(self, ctx:MyGrammarParser.Single_statementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by MyGrammarParser#function_declaration.
     def visitFunction_declaration(self, ctx:MyGrammarParser.Function_declarationContext):
         return self.visitChildren(ctx)
@@ -66,6 +71,11 @@ class MyGrammarVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by MyGrammarParser#expression.
     def visitExpression(self, ctx:MyGrammarParser.ExpressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MyGrammarParser#type.
+    def visitType(self, ctx:MyGrammarParser.TypeContext):
         return self.visitChildren(ctx)
 
 

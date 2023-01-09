@@ -1,16 +1,24 @@
 grammar MyGrammar;
 
 prog
-    : function_declaration*
-    | statement*
+    : single_statement*
+    ;
+
+single_statement
+    : function_declaration
+    | function_call ';'
+    | print_statement ';'
+    | assignment ';'
+    | if_statement
+    | while_statement
     ;
 
 function_declaration
-    : TYPE ID '(' (parameter_declaration (',' parameter_declaration)*)? ')' block
+    : type ID '(' (parameter_declaration (',' parameter_declaration)*)? ')' block
     ;
 
 parameter_declaration
-    : TYPE ID
+    : type ID
     ;
 
 block
@@ -39,7 +47,7 @@ return_statement
     ;
 
 assignment
-    : TYPE ID '=' expression
+    : type ID '=' expression
     ;
 
 if_statement
@@ -61,7 +69,14 @@ expression
     | expression (PLUS | MINUS | MULTIPLY | DIVIDE | MODULO | EQUALS | NOT_EQUALS | GREATER_THAN | LESS_THAN | GREATER_THAN_EQUALS | LESS_THAN_EQUALS | AND | OR) expression
     ;
 
-TYPE : 'int' | 'float' | 'bool' | 'string' | 'void';
+type 
+    : 'int' 
+    | 'float' 
+    | 'bool' 
+    | 'string' 
+    | 'void'
+    ;
+
 ID  : [a-zA-Z]+;
 INT : [0-9]+;
 FLOAT : [0-9]+ '.' [0-9]+;

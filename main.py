@@ -9,7 +9,7 @@ functions = {}
 variables = {} 
 
 class Function:
-    def __init__(self, name, return_type, block):
+    def __init__(self, name, block):
         self.name = name
         self.parameters = []
         self.block = block
@@ -22,25 +22,43 @@ class Function:
 
 class Evaluate(MyGrammarVisitor):
     def visitFunction_declaration(self, ctx:MyGrammarParser.Function_declarationContext):
-        return_type = ctx.TYPE().getText()
         name = ctx.ID().getText()
         block = ctx.block()
 
-        func = Function(name, return_type, block)
+        func = Function(name, block)
 
         if ctx.parameter_declaration():
             for param in ctx.parameter_declaration():
-                param_name = param[1]
+                param_name = self.visit(param)
                 func.add_parameter(param_name)
                 
         functions[name] = func
 
     def visitParameter_declaration(self, ctx:MyGrammarParser.Parameter_declarationContext):
-        return (self.visit(ctx.TYPE()), self.visit(ctx.ID()))
+        return ctx.ID().getText()
 
     def visitBlock(self, ctx:MyGrammarParser.BlockContext):
         for stmt in ctx.statement():
             self.visit(stmt)
+
+    def visitSingle_statement(self, ctx:MyGrammarParser.Single_statementContext):
+        if ctx.function_declaration():
+            self.visit(ctx.function_declaration())
+
+        elif ctx.function_call():
+            self.visit(ctx.function_call())
+
+        elif ctx.assignment():
+            self.visit(ctx.assignment())
+
+        elif ctx.if_statement():
+            self.visit(ctx.if_statement())
+
+        elif ctx.while_statement():
+            self.visit(ctx.while_statement())
+
+        elif ctx.print_statement():
+            self.visit(ctx.print_statement())
 
     def visitStatement(self, ctx:MyGrammarParser.StatementContext):
         if ctx.function_call():
@@ -57,11 +75,15 @@ class Evaluate(MyGrammarVisitor):
 
         elif ctx.while_statement():
             self.visit(ctx.while_statement())
+
+        elif ctx.print_statement():
+            self.visit(ctx.print_statement())
     
     def visitFunction_call(self, ctx:MyGrammarParser.Function_callContext):
         name = ctx.ID().getText()
         func = {}
         parameters = []
+        i = 0
 
         if name in functions:
             func = functions[name]
@@ -70,27 +92,27 @@ class Evaluate(MyGrammarVisitor):
             parameters.append(param)
 
         if ctx.expression():
-            for i, expr in ctx.expression():
-                variables[parameters[i]] = self.visit(expr)
+            for expr in ctx.expression():
+                variables[parameters[i]] = int(self.visit(expr))
+                i += 1
 
         return self.visit(func.block)
 
     def visitPrint_statement(self, ctx:MyGrammarParser.Print_statementContext):
-        print(self.visit(ctx.expression()))
+        value = self.visit(ctx.expression())
+        print(value)
 
     def visitReturn_statement(self, ctx:MyGrammarParser.Return_statementContext):
-        # retrieve the return expression and add it to the symbol table
         expr = self.visit(ctx.expression())
+        print(expr)
         return expr
     
     def visitAssignment(self, ctx:MyGrammarParser.AssignmentContext):
-        # retrieve the variable name and value and add it to the symbol table
         name = ctx.ID().getText()
         value = self.visit(ctx.expression())
         variables[name] = value
 
     def visitIf_statement(self, ctx:MyGrammarParser.If_statementContext):
-        # retrieve the if condition and statements and add them to the symbol table
         condition = self.visit(ctx.expression())
         if condition == True:
             self.visit(ctx.statement(0))
@@ -99,13 +121,11 @@ class Evaluate(MyGrammarVisitor):
 
 
     def visitWhile_statement(self, ctx:MyGrammarParser.While_statementContext):
-        # retrieve the while condition and statement and add them to the symbol table
         condition = self.visit(ctx.expression())
         while condition == True:
             self.visit(ctx.statement())
 
     def visitExpression(self, ctx:MyGrammarParser.ExpressionContext):
-        # retrieve the expression value based on the type of expression
         if ctx.ID():
             return ctx.ID().getText()
         elif ctx.INT():
@@ -119,13 +139,14 @@ class Evaluate(MyGrammarVisitor):
         elif ctx.function_call():
             return self.visit(ctx.function_call())
         elif ctx.expression():
-            # recursively visit sub-expressions
             values = []
             for expr in ctx.expression():
-                values.append(self.visit(expr))
-            # handle different types of operations
+                if type(self.visit(expr)) == str:
+                    values.append(variables[self.visit(expr)])
+                else:    
+                    values.append(int(self.visit(expr)))
             if ctx.PLUS():
-                return sum(values)
+                return values[0]+values[1]
             elif ctx.MINUS():
                 return values[0] - sum(values[1:])
             elif ctx.MULTIPLY():
@@ -168,6 +189,8 @@ class Evaluate(MyGrammarVisitor):
             else:
                 return None
 
+    def visitType(self, ctx:MyGrammarParser.TypeContext):
+        return ctx.getText()
 
 def main():
     # lex the input string

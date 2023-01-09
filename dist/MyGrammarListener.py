@@ -17,6 +17,15 @@ class MyGrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by MyGrammarParser#single_statement.
+    def enterSingle_statement(self, ctx:MyGrammarParser.Single_statementContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammarParser#single_statement.
+    def exitSingle_statement(self, ctx:MyGrammarParser.Single_statementContext):
+        pass
+
+
     # Enter a parse tree produced by MyGrammarParser#function_declaration.
     def enterFunction_declaration(self, ctx:MyGrammarParser.Function_declarationContext):
         pass
@@ -113,6 +122,15 @@ class MyGrammarListener(ParseTreeListener):
 
     # Exit a parse tree produced by MyGrammarParser#expression.
     def exitExpression(self, ctx:MyGrammarParser.ExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammarParser#type.
+    def enterType(self, ctx:MyGrammarParser.TypeContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammarParser#type.
+    def exitType(self, ctx:MyGrammarParser.TypeContext):
         pass
 
 
