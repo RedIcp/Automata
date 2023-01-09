@@ -39,7 +39,10 @@ class Evaluate(MyGrammarVisitor):
 
     def visitBlock(self, ctx:MyGrammarParser.BlockContext):
         for stmt in ctx.statement():
-            self.visit(stmt)
+            if stmt.return_statement():
+                return self.visit(stmt)
+            else:
+                self.visit(stmt)
 
     def visitSingle_statement(self, ctx:MyGrammarParser.Single_statementContext):
         if ctx.function_declaration():
@@ -65,7 +68,7 @@ class Evaluate(MyGrammarVisitor):
             self.visit(ctx.function_call())
 
         elif ctx.return_statement():
-            self.visit(ctx.return_statement())
+            return self.visit(ctx.return_statement())
 
         elif ctx.assignment():
             self.visit(ctx.assignment())
@@ -93,8 +96,12 @@ class Evaluate(MyGrammarVisitor):
 
         if ctx.expression():
             for expr in ctx.expression():
-                variables[parameters[i]] = int(self.visit(expr))
-                i += 1
+                if (self.visit(expr)).isnumeric():
+                    variables[parameters[i]] = int(self.visit(expr))
+                    i += 1
+                else:
+                    variables[parameters[i]] = int(variables[self.visit(expr)])
+                    i += 1
 
         return self.visit(func.block)
 
@@ -104,7 +111,6 @@ class Evaluate(MyGrammarVisitor):
 
     def visitReturn_statement(self, ctx:MyGrammarParser.Return_statementContext):
         expr = self.visit(ctx.expression())
-        print(expr)
         return expr
     
     def visitAssignment(self, ctx:MyGrammarParser.AssignmentContext):
@@ -203,10 +209,7 @@ def main():
 
     # create a visitor and visit the parse tree
     visitor = Evaluate()
-    symbol_table = visitor.visit(tree)
-
-    # print the symbol table
-    print(symbol_table)
+    visitor.visit(tree)
 
 if __name__ == '__main__':
     main()

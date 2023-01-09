@@ -2,4 +2,9 @@ int add(int x, int y) {
     return x + y;
 }
 
-print( add(2, 3) );
+int a = 5;
+int b = 13;
+
+print(add(a, b));
+print(add(2, 3));
+print(add(2, 3)+add(2,3));
