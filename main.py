@@ -1,3 +1,4 @@
+# antlr -Dlanguage=Python3 MyGrammar.g4 -visitor -o dist 
 from antlr4 import *
 from dist.MyGrammarLexer import MyGrammarLexer
 from dist.MyGrammarParser import MyGrammarParser
@@ -9,78 +10,82 @@ functions = {}
 variables = {} 
 
 class Function:
-    def __init__(self, name, block):
+    def __init__(self, name, return_type, block):
         self.name = name
+        self.return_type = return_type
         self.parameters = []
         self.block = block
         
-    def add_parameter(self, param_name):
-        self.parameters.append(param_name)
+    def add_parameter(self, param):
+        self.parameters.append(param)
 
-    def get_parameters(self):
-        return self.parameters
+class Variable:
+    def __init__(self, return_type, name, value):
+        self.name = name
+        self.return_type = return_type
+        self.value = value
 
 class Evaluate(MyGrammarVisitor):
     def visitFunction_declaration(self, ctx:MyGrammarParser.Function_declarationContext):
         name = ctx.ID().getText()
+        return_type = ctx.type_().getText()
         block = ctx.block()
 
-        func = Function(name, block)
+        func = Function(name, return_type, block)
 
         if ctx.parameter_declaration():
             for param in ctx.parameter_declaration():
-                param_name = self.visit(param)
-                func.add_parameter(param_name)
+                param_type = self.visit(param)[0]
+                param_name = self.visit(param)[1]
+                func.add_parameter((param_type, param_name))
                 
         functions[name] = func
 
     def visitParameter_declaration(self, ctx:MyGrammarParser.Parameter_declarationContext):
-        return ctx.ID().getText()
+        parameter = (ctx.type_().getText(), ctx.ID().getText())
+        return parameter
 
     def visitBlock(self, ctx:MyGrammarParser.BlockContext):
         for stmt in ctx.statement():
-            if stmt.return_statement():
-                return self.visit(stmt)
-            else:
-                self.visit(stmt)
+            return self.visit(stmt)
 
     def visitSingle_statement(self, ctx:MyGrammarParser.Single_statementContext):
         if ctx.function_declaration():
-            self.visit(ctx.function_declaration())
+            return self.visit(ctx.function_declaration())
 
         elif ctx.function_call():
-            self.visit(ctx.function_call())
+            return self.visit(ctx.function_call())
 
         elif ctx.assignment():
-            self.visit(ctx.assignment())
+            return self.visit(ctx.assignment())
 
         elif ctx.if_statement():
-            self.visit(ctx.if_statement())
+            return self.visit(ctx.if_statement())
 
         elif ctx.while_statement():
-            self.visit(ctx.while_statement())
+            return self.visit(ctx.while_statement())
 
         elif ctx.print_statement():
-            self.visit(ctx.print_statement())
+            return self.visit(ctx.print_statement())
 
     def visitStatement(self, ctx:MyGrammarParser.StatementContext):
         if ctx.function_call():
-            self.visit(ctx.function_call())
+            return self.visit(ctx.function_call())
 
         elif ctx.return_statement():
             return self.visit(ctx.return_statement())
 
         elif ctx.assignment():
-            self.visit(ctx.assignment())
+            return self.visit(ctx.assignment())
 
         elif ctx.if_statement():
-            self.visit(ctx.if_statement())
+            return self.visit(ctx.if_statement())
 
         elif ctx.while_statement():
-            self.visit(ctx.while_statement())
+            return self.visit(ctx.while_statement())
 
         elif ctx.print_statement():
-            self.visit(ctx.print_statement())
+            return self.visit(ctx.print_statement())
     
     def visitFunction_call(self, ctx:MyGrammarParser.Function_callContext):
         name = ctx.ID().getText()
@@ -91,19 +96,36 @@ class Evaluate(MyGrammarVisitor):
         if name in functions:
             func = functions[name]
 
-        for param in func.get_parameters():
-            parameters.append(param)
+        parameters = func.parameters
 
         if ctx.expression():
             for expr in ctx.expression():
-                if (self.visit(expr)).isnumeric():
-                    variables[parameters[i]] = int(self.visit(expr))
-                    i += 1
+                value = self.visit(expr)
+                if value.isnumeric():
+                    if parameters[i][0] == 'int':
+                        number = Variable(parameters[i][0], parameters[i][1], int(value))
+                    else:
+                        number = Variable(parameters[i][0], parameters[i][1], float(value))
+                    variables[parameters[i][1]] = number
                 else:
-                    variables[parameters[i]] = int(variables[self.visit(expr)])
-                    i += 1
+                    if value in variables:
+                        if parameters[i][0] == 'int':
+                            number = Variable(parameters[i][0], parameters[i][1], int(variables[value].value))
+                        else:
+                            number = Variable(parameters[i][0], parameters[i][1], float(variables[value].value))
+                        variables[parameters[i][1]] = number
+                    else:
+                        print("Variable " + str(value) + " dont have any number")
+                        return
 
-        return self.visit(func.block)
+                i += 1
+
+        if func.return_type == 'int':
+            return int(self.visit(func.block))
+        elif func.return_type == 'float':
+            return float(self.visit(func.block))
+        else:
+            return None
 
     def visitPrint_statement(self, ctx:MyGrammarParser.Print_statementContext):
         value = self.visit(ctx.expression())
@@ -114,16 +136,25 @@ class Evaluate(MyGrammarVisitor):
         return expr
     
     def visitAssignment(self, ctx:MyGrammarParser.AssignmentContext):
-        name = ctx.ID().getText()
-        value = self.visit(ctx.expression())
-        variables[name] = value
+        var_name = ctx.ID().getText()
+        var_type = ctx.type_().getText()
+        number = None
+        if ctx.expression():
+            value = self.visit(ctx.expression())
+            if var_type == 'int':
+                number = Variable(var_type, var_name, int(value))
+            else:
+                number = Variable(var_type, var_name, float(value))
+        else:
+            number = None
+        variables[var_name] = number
 
     def visitIf_statement(self, ctx:MyGrammarParser.If_statementContext):
         condition = self.visit(ctx.expression())
         if condition == True:
-            self.visit(ctx.statement(0))
+            return self.visit(ctx.statement(0))
         else:
-            self.visit(ctx.statement(1))
+            return self.visit(ctx.statement(1))
 
 
     def visitWhile_statement(self, ctx:MyGrammarParser.While_statementContext):
@@ -133,7 +164,14 @@ class Evaluate(MyGrammarVisitor):
 
     def visitExpression(self, ctx:MyGrammarParser.ExpressionContext):
         if ctx.ID():
-            return ctx.ID().getText()
+            value = ctx.ID().getText()
+            if value in variables:
+                if variables[value] == None:
+                    return None
+                else:    
+                    return variables[value].name
+            else:
+                return value 
         elif ctx.INT():
             return ctx.INT().getText()
         elif ctx.FLOAT():
@@ -147,14 +185,26 @@ class Evaluate(MyGrammarVisitor):
         elif ctx.expression():
             values = []
             for expr in ctx.expression():
-                if type(self.visit(expr)) == str:
-                    values.append(variables[self.visit(expr)])
+                value = self.visit(expr)
+                if not str(value).isnumeric() and type(value) != float:
+                    if value in variables:
+                        var = variables[value]
+                        if var.return_type == 'int':
+                            values.append(int(var.value))
+                        else:
+                            values.append(float(var.value))
+                    else:
+                        print("No variable found with " + str(value) + " id")
+                        return
+                elif value == None:
+                    print(str(value) + " variable is not assigned with numbers")
+                    return
                 else:    
-                    values.append(int(self.visit(expr)))
+                    values.append(value)
             if ctx.PLUS():
-                return values[0]+values[1]
+                return values[0] + values[1]
             elif ctx.MINUS():
-                return values[0] - sum(values[1:])
+                return values[0] - values[1]
             elif ctx.MULTIPLY():
                 result = 1
                 for val in values:

@@ -14,7 +14,7 @@ single_statement
     ;
 
 function_declaration
-    : type ID '(' (parameter_declaration (',' parameter_declaration)*)? ')' block
+    : 'function' type ID '(' (parameter_declaration (',' parameter_declaration)*)? ')' block
     ;
 
 parameter_declaration
@@ -25,7 +25,7 @@ block
     : '{' (statement)* '}'
     ;
 
-statement
+statement //function_statement
     : function_call ';'
     | print_statement ';'
     | return_statement ';'
@@ -47,15 +47,15 @@ return_statement
     ;
 
 assignment
-    : type ID '=' expression
+    : type ID ('=' expression)?
     ;
 
 if_statement
-    : 'if' '(' expression ')' statement ('else' statement)?
+    : 'if' '(' expression ')' '{' statement '}' ('else' '{' statement '}')?
     ;
 
 while_statement
-    : 'while' '(' expression ')' statement
+    : 'while' '(' expression ')' '{' statement '}'
     ;
 
 expression
