@@ -4,9 +4,7 @@ function float add(float x, int y) {
 
 float a = 5.5;
 int b = 13;
-int c;
 
-print(c);
 print(add(a, b));
 print(add(2, 3));
 print(add(2, 3)+add(2,3));
