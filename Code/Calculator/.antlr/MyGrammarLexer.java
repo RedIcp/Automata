@@ -1,4 +1,4 @@
-// Generated from e:\Semester 4\B-Algorithm\Automata\FunctionDemo\MyGrammar.g4 by ANTLR 4.9.2
+// Generated from /Users/javiercanto/Desktop/Fontys_Automata/Code/Calculator/MyGrammar.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

@@ -40,16 +40,20 @@ class Evaluate(MyGrammar2Listener):
             right = self.evaluate_values(ctx.values(1))
             comparator = ctx.comparator().getText()
             if comparator == '>=':
-                return left >= right
+                return z3.is_ge(left >= right)
+                #return left >= right
             elif comparator == '<=':
-                return left <= right
+                return z3.is_le(left <= right)
+                #return left <= right
             elif comparator == '<':
-                return left < right
+                return z3.is_lt(left > right)
+                #return left < right
             elif comparator == '>':
-                return left > right
+                return z3.is_gt(left > right)
+                #return left > right
         elif ctx.equal():
             var_name = ctx.ID().getText()
-            value = int(ctx.NUMBER().getText())
+            value = z3.Int(ctx.NUMBER().getText())
             return self.variables[var_name] == value
         else:
             # Handle values
