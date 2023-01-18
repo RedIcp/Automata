@@ -80,6 +80,15 @@ class MyGrammar2Listener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by MyGrammar2Parser#equal.
+    def enterEqual(self, ctx:MyGrammar2Parser.EqualContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammar2Parser#equal.
+    def exitEqual(self, ctx:MyGrammar2Parser.EqualContext):
+        pass
+
+
     # Enter a parse tree produced by MyGrammar2Parser#comp.
     def enterComp(self, ctx:MyGrammar2Parser.CompContext):
         pass

@@ -10,32 +10,35 @@ else:
 
 def serializedATN():
     return [
-        4,1,20,88,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
-        6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,1,0,4,0,24,8,0,11,0,12,0,25,
-        1,1,1,1,1,1,1,1,3,1,32,8,1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,3,1,3,1,
-        3,1,3,1,3,1,4,1,4,1,4,1,4,1,4,5,4,51,8,4,10,4,12,4,54,9,4,1,4,1,
-        4,1,5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,
-        6,3,6,74,8,6,1,7,1,7,1,8,1,8,1,9,1,9,1,9,1,9,1,10,1,10,1,10,1,10,
-        1,10,0,0,11,0,2,4,6,8,10,12,14,16,18,20,0,3,1,0,18,19,1,0,8,12,1,
-        0,13,14,84,0,23,1,0,0,0,2,31,1,0,0,0,4,33,1,0,0,0,6,40,1,0,0,0,8,
-        45,1,0,0,0,10,57,1,0,0,0,12,73,1,0,0,0,14,75,1,0,0,0,16,77,1,0,0,
-        0,18,79,1,0,0,0,20,83,1,0,0,0,22,24,3,2,1,0,23,22,1,0,0,0,24,25,
-        1,0,0,0,25,23,1,0,0,0,25,26,1,0,0,0,26,1,1,0,0,0,27,32,3,4,2,0,28,
-        32,3,6,3,0,29,32,3,18,9,0,30,32,3,20,10,0,31,27,1,0,0,0,31,28,1,
-        0,0,0,31,29,1,0,0,0,31,30,1,0,0,0,32,3,1,0,0,0,33,34,5,1,0,0,34,
-        35,5,2,0,0,35,36,5,18,0,0,36,37,5,3,0,0,37,38,5,4,0,0,38,39,5,5,
-        0,0,39,5,1,0,0,0,40,41,5,1,0,0,41,42,5,6,0,0,42,43,3,12,6,0,43,44,
-        5,5,0,0,44,7,1,0,0,0,45,46,5,1,0,0,46,47,5,7,0,0,47,48,3,10,5,0,
-        48,52,3,10,5,0,49,51,3,10,5,0,50,49,1,0,0,0,51,54,1,0,0,0,52,50,
-        1,0,0,0,52,53,1,0,0,0,53,55,1,0,0,0,54,52,1,0,0,0,55,56,5,5,0,0,
-        56,9,1,0,0,0,57,58,7,0,0,0,58,11,1,0,0,0,59,74,3,8,4,0,60,61,5,1,
-        0,0,61,62,3,16,8,0,62,63,3,12,6,0,63,64,3,12,6,0,64,65,5,5,0,0,65,
-        74,1,0,0,0,66,67,5,1,0,0,67,68,3,14,7,0,68,69,3,10,5,0,69,70,3,10,
-        5,0,70,71,5,5,0,0,71,74,1,0,0,0,72,74,3,10,5,0,73,59,1,0,0,0,73,
-        60,1,0,0,0,73,66,1,0,0,0,73,72,1,0,0,0,74,13,1,0,0,0,75,76,7,1,0,
-        0,76,15,1,0,0,0,77,78,7,2,0,0,78,17,1,0,0,0,79,80,5,1,0,0,80,81,
-        5,15,0,0,81,82,5,5,0,0,82,19,1,0,0,0,83,84,5,1,0,0,84,85,5,16,0,
-        0,85,86,5,5,0,0,86,21,1,0,0,0,4,25,31,52,73
+        4,1,20,98,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,1,0,4,0,26,8,0,11,
+        0,12,0,27,1,1,1,1,1,1,1,1,3,1,34,8,1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,
+        1,3,1,3,1,3,1,3,1,3,1,4,1,4,1,4,1,4,1,4,5,4,53,8,4,10,4,12,4,56,
+        9,4,1,4,1,4,1,5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,
+        1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,3,6,82,8,6,1,7,1,7,1,8,1,8,1,
+        9,1,9,1,10,1,10,1,10,1,10,1,11,1,11,1,11,1,11,1,11,0,0,12,0,2,4,
+        6,8,10,12,14,16,18,20,22,0,3,1,0,18,19,1,0,8,11,1,0,13,14,94,0,25,
+        1,0,0,0,2,33,1,0,0,0,4,35,1,0,0,0,6,42,1,0,0,0,8,47,1,0,0,0,10,59,
+        1,0,0,0,12,81,1,0,0,0,14,83,1,0,0,0,16,85,1,0,0,0,18,87,1,0,0,0,
+        20,89,1,0,0,0,22,93,1,0,0,0,24,26,3,2,1,0,25,24,1,0,0,0,26,27,1,
+        0,0,0,27,25,1,0,0,0,27,28,1,0,0,0,28,1,1,0,0,0,29,34,3,4,2,0,30,
+        34,3,6,3,0,31,34,3,20,10,0,32,34,3,22,11,0,33,29,1,0,0,0,33,30,1,
+        0,0,0,33,31,1,0,0,0,33,32,1,0,0,0,34,3,1,0,0,0,35,36,5,1,0,0,36,
+        37,5,2,0,0,37,38,5,18,0,0,38,39,5,3,0,0,39,40,5,4,0,0,40,41,5,5,
+        0,0,41,5,1,0,0,0,42,43,5,1,0,0,43,44,5,6,0,0,44,45,3,12,6,0,45,46,
+        5,5,0,0,46,7,1,0,0,0,47,48,5,1,0,0,48,49,5,7,0,0,49,50,3,10,5,0,
+        50,54,3,10,5,0,51,53,3,10,5,0,52,51,1,0,0,0,53,56,1,0,0,0,54,52,
+        1,0,0,0,54,55,1,0,0,0,55,57,1,0,0,0,56,54,1,0,0,0,57,58,5,5,0,0,
+        58,9,1,0,0,0,59,60,7,0,0,0,60,11,1,0,0,0,61,82,3,8,4,0,62,63,5,1,
+        0,0,63,64,3,18,9,0,64,65,3,12,6,0,65,66,3,12,6,0,66,67,5,5,0,0,67,
+        82,1,0,0,0,68,69,5,1,0,0,69,70,3,14,7,0,70,71,3,10,5,0,71,72,3,10,
+        5,0,72,73,5,5,0,0,73,82,1,0,0,0,74,75,5,1,0,0,75,76,3,16,8,0,76,
+        77,5,18,0,0,77,78,5,19,0,0,78,79,5,5,0,0,79,82,1,0,0,0,80,82,3,10,
+        5,0,81,61,1,0,0,0,81,62,1,0,0,0,81,68,1,0,0,0,81,74,1,0,0,0,81,80,
+        1,0,0,0,82,13,1,0,0,0,83,84,7,1,0,0,84,15,1,0,0,0,85,86,5,12,0,0,
+        86,17,1,0,0,0,87,88,7,2,0,0,88,19,1,0,0,0,89,90,5,1,0,0,90,91,5,
+        15,0,0,91,92,5,5,0,0,92,21,1,0,0,0,93,94,5,1,0,0,94,95,5,16,0,0,
+        95,96,5,5,0,0,96,23,1,0,0,0,4,27,33,54,81
     ]
 
 class MyGrammar2Parser ( Parser ):
@@ -66,12 +69,13 @@ class MyGrammar2Parser ( Parser ):
     RULE_values = 5
     RULE_formula = 6
     RULE_comparator = 7
-    RULE_comp = 8
-    RULE_check_sat = 9
-    RULE_get_model = 10
+    RULE_equal = 8
+    RULE_comp = 9
+    RULE_check_sat = 10
+    RULE_get_model = 11
 
     ruleNames =  [ "program", "command", "declare_fun", "assert_cmd", "distinct_formula", 
-                   "values", "formula", "comparator", "comp", "check_sat", 
+                   "values", "formula", "comparator", "equal", "comp", "check_sat", 
                    "get_model" ]
 
     EOF = Token.EOF
@@ -140,13 +144,13 @@ class MyGrammar2Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 23 
+            self.state = 25 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 22
+                self.state = 24
                 self.command()
-                self.state = 25 
+                self.state = 27 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==1):
@@ -203,30 +207,30 @@ class MyGrammar2Parser ( Parser ):
         localctx = MyGrammar2Parser.CommandContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_command)
         try:
-            self.state = 31
+            self.state = 33
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 27
+                self.state = 29
                 self.declare_fun()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 28
+                self.state = 30
                 self.assert_cmd()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 29
+                self.state = 31
                 self.check_sat()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 30
+                self.state = 32
                 self.get_model()
                 pass
 
@@ -270,17 +274,17 @@ class MyGrammar2Parser ( Parser ):
         self.enterRule(localctx, 4, self.RULE_declare_fun)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 33
-            self.match(MyGrammar2Parser.T__0)
-            self.state = 34
-            self.match(MyGrammar2Parser.T__1)
             self.state = 35
-            self.match(MyGrammar2Parser.ID)
+            self.match(MyGrammar2Parser.T__0)
             self.state = 36
-            self.match(MyGrammar2Parser.T__2)
+            self.match(MyGrammar2Parser.T__1)
             self.state = 37
-            self.match(MyGrammar2Parser.T__3)
+            self.match(MyGrammar2Parser.ID)
             self.state = 38
+            self.match(MyGrammar2Parser.T__2)
+            self.state = 39
+            self.match(MyGrammar2Parser.T__3)
+            self.state = 40
             self.match(MyGrammar2Parser.T__4)
         except RecognitionException as re:
             localctx.exception = re
@@ -322,13 +326,13 @@ class MyGrammar2Parser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_assert_cmd)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 40
-            self.match(MyGrammar2Parser.T__0)
-            self.state = 41
-            self.match(MyGrammar2Parser.T__5)
             self.state = 42
-            self.formula()
+            self.match(MyGrammar2Parser.T__0)
             self.state = 43
+            self.match(MyGrammar2Parser.T__5)
+            self.state = 44
+            self.formula()
+            self.state = 45
             self.match(MyGrammar2Parser.T__4)
         except RecognitionException as re:
             localctx.exception = re
@@ -374,25 +378,25 @@ class MyGrammar2Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 45
-            self.match(MyGrammar2Parser.T__0)
-            self.state = 46
-            self.match(MyGrammar2Parser.T__6)
             self.state = 47
-            self.values()
+            self.match(MyGrammar2Parser.T__0)
             self.state = 48
+            self.match(MyGrammar2Parser.T__6)
+            self.state = 49
             self.values()
-            self.state = 52
+            self.state = 50
+            self.values()
+            self.state = 54
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==18 or _la==19:
-                self.state = 49
+                self.state = 51
                 self.values()
-                self.state = 54
+                self.state = 56
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 55
+            self.state = 57
             self.match(MyGrammar2Parser.T__4)
         except RecognitionException as re:
             localctx.exception = re
@@ -437,7 +441,7 @@ class MyGrammar2Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 57
+            self.state = 59
             _la = self._input.LA(1)
             if not(_la==18 or _la==19):
                 self._errHandler.recoverInline(self)
@@ -486,6 +490,16 @@ class MyGrammar2Parser ( Parser ):
                 return self.getTypedRuleContext(MyGrammar2Parser.ValuesContext,i)
 
 
+        def equal(self):
+            return self.getTypedRuleContext(MyGrammar2Parser.EqualContext,0)
+
+
+        def ID(self):
+            return self.getToken(MyGrammar2Parser.ID, 0)
+
+        def NUMBER(self):
+            return self.getToken(MyGrammar2Parser.NUMBER, 0)
+
         def getRuleIndex(self):
             return MyGrammar2Parser.RULE_formula
 
@@ -505,46 +519,60 @@ class MyGrammar2Parser ( Parser ):
         localctx = MyGrammar2Parser.FormulaContext(self, self._ctx, self.state)
         self.enterRule(localctx, 12, self.RULE_formula)
         try:
-            self.state = 73
+            self.state = 81
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 59
+                self.state = 61
                 self.distinct_formula()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 60
-                self.match(MyGrammar2Parser.T__0)
-                self.state = 61
-                self.comp()
                 self.state = 62
-                self.formula()
+                self.match(MyGrammar2Parser.T__0)
                 self.state = 63
-                self.formula()
+                self.comp()
                 self.state = 64
+                self.formula()
+                self.state = 65
+                self.formula()
+                self.state = 66
                 self.match(MyGrammar2Parser.T__4)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 66
-                self.match(MyGrammar2Parser.T__0)
-                self.state = 67
-                self.comparator()
                 self.state = 68
-                self.values()
+                self.match(MyGrammar2Parser.T__0)
                 self.state = 69
-                self.values()
+                self.comparator()
                 self.state = 70
+                self.values()
+                self.state = 71
+                self.values()
+                self.state = 72
                 self.match(MyGrammar2Parser.T__4)
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 72
+                self.state = 74
+                self.match(MyGrammar2Parser.T__0)
+                self.state = 75
+                self.equal()
+                self.state = 76
+                self.match(MyGrammar2Parser.ID)
+                self.state = 77
+                self.match(MyGrammar2Parser.NUMBER)
+                self.state = 78
+                self.match(MyGrammar2Parser.T__4)
+                pass
+
+            elif la_ == 5:
+                self.enterOuterAlt(localctx, 5)
+                self.state = 80
                 self.values()
                 pass
 
@@ -587,13 +615,52 @@ class MyGrammar2Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 75
+            self.state = 83
             _la = self._input.LA(1)
-            if not(((_la) & ~0x3f) == 0 and ((1 << _la) & 7936) != 0):
+            if not(((_la) & ~0x3f) == 0 and ((1 << _la) & 3840) != 0):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class EqualContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+
+        def getRuleIndex(self):
+            return MyGrammar2Parser.RULE_equal
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterEqual" ):
+                listener.enterEqual(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitEqual" ):
+                listener.exitEqual(self)
+
+
+
+
+    def equal(self):
+
+        localctx = MyGrammar2Parser.EqualContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 16, self.RULE_equal)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 85
+            self.match(MyGrammar2Parser.T__11)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -628,11 +695,11 @@ class MyGrammar2Parser ( Parser ):
     def comp(self):
 
         localctx = MyGrammar2Parser.CompContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_comp)
+        self.enterRule(localctx, 18, self.RULE_comp)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 77
+            self.state = 87
             _la = self._input.LA(1)
             if not(_la==13 or _la==14):
                 self._errHandler.recoverInline(self)
@@ -673,14 +740,14 @@ class MyGrammar2Parser ( Parser ):
     def check_sat(self):
 
         localctx = MyGrammar2Parser.Check_satContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_check_sat)
+        self.enterRule(localctx, 20, self.RULE_check_sat)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 79
+            self.state = 89
             self.match(MyGrammar2Parser.T__0)
-            self.state = 80
+            self.state = 90
             self.match(MyGrammar2Parser.T__14)
-            self.state = 81
+            self.state = 91
             self.match(MyGrammar2Parser.T__4)
         except RecognitionException as re:
             localctx.exception = re
@@ -716,14 +783,14 @@ class MyGrammar2Parser ( Parser ):
     def get_model(self):
 
         localctx = MyGrammar2Parser.Get_modelContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_get_model)
+        self.enterRule(localctx, 22, self.RULE_get_model)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 83
+            self.state = 93
             self.match(MyGrammar2Parser.T__0)
-            self.state = 84
+            self.state = 94
             self.match(MyGrammar2Parser.T__15)
-            self.state = 85
+            self.state = 95
             self.match(MyGrammar2Parser.T__4)
         except RecognitionException as re:
             localctx.exception = re

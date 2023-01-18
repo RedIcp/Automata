@@ -47,8 +47,10 @@ class Evaluate(MyGrammar2Listener):
                 return left < right
             elif comparator == '>':
                 return left > right
-            elif comparator == '=':
-                return left == right
+        elif ctx.equal():
+            var_name = ctx.ID().getText()
+            value = int(ctx.NUMBER().getText())
+            return self.variables[var_name] == value
         else:
             # Handle values
             return self.evaluate_values(ctx.values())

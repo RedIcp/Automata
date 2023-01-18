@@ -16,10 +16,13 @@ values: (ID | NUMBER);
 formula : distinct_formula
         | '(' comp formula formula ')'
         | '(' comparator values values ')'
+        | '(' equal ID NUMBER ')'
         | values
         ;
 
-comparator : '>=' | '<=' | '<' | '>' | '=';
+comparator : '>=' | '<=' | '<' | '>';
+
+equal: '=';
 
 comp: 'and' | 'or';
 
