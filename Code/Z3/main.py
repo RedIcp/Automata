@@ -54,7 +54,7 @@ class Evaluate(MyGrammar2Listener):
         elif ctx.equal():
             var_name = ctx.ID().getText()
             value = z3.Int(ctx.NUMBER().getText())
-            return self.variables[var_name] == value
+            return z3.is_eq(self.variables[var_name] == value)
         else:
             # Handle values
             return self.evaluate_values(ctx.values())
