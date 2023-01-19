@@ -37,9 +37,23 @@ class Evaluate(MyGrammar2Listener):
             # Handle compound formula
             values = [self.evaluate_formula(f) for f in ctx.comp_formula().formula()]
             if ctx.comp_formula().comp().getText() == 'and':
-                return "( && " + str(values) + ' )'
+                string = "("
+                for i, value in enumerate(values):
+                    if i == 0:
+                        string += '(' + str(value) + ")"
+                    else:
+                        string += ' && (' + str(value) + ")"
+
+                return string
             else:
-                return "( || " + str(values)  + ' )'
+                string = "("
+                for i, value in enumerate(values):
+                    if i == 0:
+                        string += '(' + str(value) + ")"
+                    else:
+                        string += ' || (' + str(value) + ")"
+
+                return string
         elif ctx.comparator():
             # Handle comparator formula
             left = self.evaluate_values(ctx.values(0))
@@ -57,13 +71,25 @@ class Evaluate(MyGrammar2Listener):
             symbol = ctx.operation_dormula().operation().getText()
             #values = [self.evaluate_values(v) for v in ctx.operation_dormula().NUMBER()]
             values = []
-            for num in ctx.operation_dormula().NUMBER():
-                values.append(num.getText())
-            return symbol + str(values)
+            string = '('
+            for i, num in enumerate(ctx.operation_dormula().NUMBER()):
+                value = num.getText()
+                values.append(value)
+                if i+1 < len(ctx.operation_dormula().NUMBER()):
+                    string += value + " " + symbol + " "
+                else:
+                    string += value + ")"
+
+            return string
+            # x = (12 symbol 12456 symbol 67)
         elif ctx.equal():
             var_name = ctx.ID().getText()
-            value = self.evaluate_formula(ctx.formula())
-            return '( ' + var_name + ' == ( ' + value + '))'
+            values = self.evaluate_formula(ctx.formula())
+            print(values)
+            string = '( ' + var_name + ' == ( ' + str(values)
+
+            #  (aa == (x)
+            return '( ' + var_name + ' == ( ' + values + '))'
         else:
             # Handle values
             return self.evaluate_values(ctx.values())
