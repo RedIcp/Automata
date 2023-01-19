@@ -3,9 +3,11 @@ grammar MyGrammar2;
 // rules
 program : command+ ;
 
-command : declare_fun | assert_cmd | check_sat | get_model ;
+command : declare_fun | assert_cmd | check_sat | get_model | declare_const ;
 
-declare_fun : '(' 'declare-fun' ID '()' 'Int' ')' ;
+declare_fun : '(' 'declare-fun' ID '(' INT_W* ')' 'Int' ')' ;
+
+declare_const: '(' 'define-const' ID 'Int' NUMBER ')' ;
 
 assert_cmd : '(' 'assert' formula ')';
 
@@ -14,15 +16,18 @@ distinct_formula : '(' 'distinct' values values values*')' ;
 values: (ID | NUMBER);
 
 formula : distinct_formula
-        | '(' comp formula formula ')'
+        | '(' comp formula formula formula* ')'
         | '(' comparator values values ')'
-        | '(' equal ID NUMBER ')'
+        | '(' operation NUMBER NUMBER NUMBER* ')'
+        | '(' equal ID formula ')'
         | values
         ;
 
 comparator : '>=' | '<=' | '<' | '>';
 
 equal: '=';
+
+operation: '+' | '-' | '/' | '*';
 
 comp: 'and' | 'or';
 
@@ -36,3 +41,4 @@ COMMENT : ';' .*? '\n' -> skip ;
 ID : [a-zA-Z]+[a-zA-Z0-9]* ;
 NUMBER : [0-9]+ ;
 WS : [ \t\r\n]+ -> skip ;
+INT_W: 'Int';
