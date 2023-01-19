@@ -116,12 +116,75 @@ class MyGrammarListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by MyGrammarParser#expression.
-    def enterExpression(self, ctx:MyGrammarParser.ExpressionContext):
+    # Enter a parse tree produced by MyGrammarParser#calculation.
+    def enterCalculation(self, ctx:MyGrammarParser.CalculationContext):
         pass
 
-    # Exit a parse tree produced by MyGrammarParser#expression.
-    def exitExpression(self, ctx:MyGrammarParser.ExpressionContext):
+    # Exit a parse tree produced by MyGrammarParser#calculation.
+    def exitCalculation(self, ctx:MyGrammarParser.CalculationContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammarParser#parens.
+    def enterParens(self, ctx:MyGrammarParser.ParensContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammarParser#parens.
+    def exitParens(self, ctx:MyGrammarParser.ParensContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammarParser#bool.
+    def enterBool(self, ctx:MyGrammarParser.BoolContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammarParser#bool.
+    def exitBool(self, ctx:MyGrammarParser.BoolContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammarParser#string.
+    def enterString(self, ctx:MyGrammarParser.StringContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammarParser#string.
+    def exitString(self, ctx:MyGrammarParser.StringContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammarParser#id.
+    def enterId(self, ctx:MyGrammarParser.IdContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammarParser#id.
+    def exitId(self, ctx:MyGrammarParser.IdContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammarParser#float.
+    def enterFloat(self, ctx:MyGrammarParser.FloatContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammarParser#float.
+    def exitFloat(self, ctx:MyGrammarParser.FloatContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammarParser#func_call.
+    def enterFunc_call(self, ctx:MyGrammarParser.Func_callContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammarParser#func_call.
+    def exitFunc_call(self, ctx:MyGrammarParser.Func_callContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammarParser#int.
+    def enterInt(self, ctx:MyGrammarParser.IntContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammarParser#int.
+    def exitInt(self, ctx:MyGrammarParser.IntContext):
         pass
 
 

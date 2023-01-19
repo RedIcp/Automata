@@ -14,7 +14,7 @@ single_statement
     ;
 
 function_declaration
-    : 'function' type ID '(' (parameter_declaration (',' parameter_declaration)*)? ')' block
+    : 'function' type ID '(' (parameter_declaration (',' parameter_declaration)*)? ')' block 
     ;
 
 parameter_declaration
@@ -48,25 +48,26 @@ return_statement
 
 assignment
     : type ID ('=' expression)?
+    | ID '=' expression
     ;
 
 if_statement
-    : 'if' '(' expression ')' '{' statement '}' ('else' '{' statement '}')?
+    : 'if' '(' expression ')' block ('else' block)?
     ;
 
 while_statement
-    : 'while' '(' expression ')' '{' statement '}'
+    : 'while' '(' expression ')' block
     ;
 
 expression
-    : ID
-    | INT
-    | FLOAT
-    | BOOL
-    | STRING
-    | function_call
-    | '(' expression ')'
-    | expression (PLUS | MINUS | MULTIPLY | DIVIDE | MODULO | EQUALS | NOT_EQUALS | GREATER_THAN | LESS_THAN | GREATER_THAN_EQUALS | LESS_THAN_EQUALS | AND | OR) expression
+    : ID                    #id
+    | INT                   #int
+    | FLOAT                 #float
+    | BOOL                  #bool
+    | STRING                #string
+    | function_call         #func_call
+    | '(' expression ')'    #parens
+    | expression (PLUS | MINUS | MULTIPLY | DIVIDE | MODULO | EQUALS | NOT_EQUALS | GREATER_THAN | LESS_THAN | GREATER_THAN_EQUALS | LESS_THAN_EQUALS | AND | OR) expression #calculation
     ;
 
 type 

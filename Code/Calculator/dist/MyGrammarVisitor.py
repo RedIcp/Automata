@@ -69,8 +69,43 @@ class MyGrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MyGrammarParser#expression.
-    def visitExpression(self, ctx:MyGrammarParser.ExpressionContext):
+    # Visit a parse tree produced by MyGrammarParser#calculation.
+    def visitCalculation(self, ctx:MyGrammarParser.CalculationContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MyGrammarParser#parens.
+    def visitParens(self, ctx:MyGrammarParser.ParensContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MyGrammarParser#bool.
+    def visitBool(self, ctx:MyGrammarParser.BoolContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MyGrammarParser#string.
+    def visitString(self, ctx:MyGrammarParser.StringContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MyGrammarParser#id.
+    def visitId(self, ctx:MyGrammarParser.IdContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MyGrammarParser#float.
+    def visitFloat(self, ctx:MyGrammarParser.FloatContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MyGrammarParser#func_call.
+    def visitFunc_call(self, ctx:MyGrammarParser.Func_callContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MyGrammarParser#int.
+    def visitInt(self, ctx:MyGrammarParser.IntContext):
         return self.visitChildren(ctx)
 
 
