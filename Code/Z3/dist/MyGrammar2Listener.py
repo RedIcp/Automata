@@ -35,6 +35,15 @@ class MyGrammar2Listener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by MyGrammar2Parser#declare_const.
+    def enterDeclare_const(self, ctx:MyGrammar2Parser.Declare_constContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammar2Parser#declare_const.
+    def exitDeclare_const(self, ctx:MyGrammar2Parser.Declare_constContext):
+        pass
+
+
     # Enter a parse tree produced by MyGrammar2Parser#assert_cmd.
     def enterAssert_cmd(self, ctx:MyGrammar2Parser.Assert_cmdContext):
         pass
@@ -86,6 +95,15 @@ class MyGrammar2Listener(ParseTreeListener):
 
     # Exit a parse tree produced by MyGrammar2Parser#equal.
     def exitEqual(self, ctx:MyGrammar2Parser.EqualContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammar2Parser#operation.
+    def enterOperation(self, ctx:MyGrammar2Parser.OperationContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammar2Parser#operation.
+    def exitOperation(self, ctx:MyGrammar2Parser.OperationContext):
         pass
 
 

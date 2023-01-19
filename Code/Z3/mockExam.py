@@ -1,5 +1,4 @@
 # antlr -Dlanguage=Python3 MyGrammar2.g4 -o dist 
-import z3
 from antlr4 import *
 from dist.MyGrammar2Lexer import MyGrammar2Lexer
 from dist.MyGrammar2Parser import MyGrammar2Parser
@@ -7,54 +6,56 @@ from dist.MyGrammar2Listener import MyGrammar2Listener
 
 class Evaluate(MyGrammar2Listener):
     def __init__(self):
-        self.solver = z3.Solver()
         self.variables = {}
+        self.functions = []
+    
+    # TODO: print variable 'Dd' undefined
+    # TODO: print the functions at the end
+        
+    def enterDeclare_const(self, ctx:MyGrammar2Parser.Declare_constContext):
+        var_name = ctx.ID().getText()
+        value = int(ctx.NUMBER().getText())
+        if var_name in self.variables:
+            print('*** ERROR in define-const: variable ' + str(var_name) + ' redefined ***')
+        else:
+            self.variables[var_name] = value
 
     def enterDeclare_fun(self, ctx:MyGrammar2Parser.Declare_funContext):
         var_name = ctx.ID().getText()
-        self.variables[var_name] = z3.Int(var_name)
-        print("enterDeclare_fun var_name: " + str(z3.Int(var_name)))
-        print("enterDeclare_fun self.variables[var_name]: " + str(self.variables[var_name]))
+        if var_name in self.variables:
+            print('*** ERROR in define-fun: variable ' + str(var_name) + ' redefined ***')
+        elif ctx.INT_W():
+            self.functions.append(var_name)
 
     def enterAssert_cmd(self, ctx:MyGrammar2Parser.Assert_cmdContext):
-        # Evaluate the formula and add it as an assertion to the solver
         formula = self.evaluate_formula(ctx.formula())
-        print("enterAssert_cmd FORMULA: " + str(formula))
-        self.solver.add(formula)
+        print("ASSERT: " + str(formula))
     
     def evaluate_formula(self, ctx:MyGrammar2Parser.FormulaContext):
         if ctx.distinct_formula():
             # Handle distinct formula
             values = [self.evaluate_values(v) for v in ctx.distinct_formula().values()]
-            print("DISTINCT: " + str(values))
-            return z3.Distinct(*values)
+            return "DISTINCT: " + str(values)
         elif ctx.comp():
             # Handle compound formula
-            left = self.evaluate_formula(ctx.formula(0))
-            right = self.evaluate_formula(ctx.formula(1))
+            values = [self.evaluate_formula(f) for f in ctx.formula().values()]
             if ctx.comp().getText() == 'and':
-                print("AND: " + str(left) + ' ' + str(right))
-                return z3.And(left, right)
+                return " && " + str(values)
             else:
-                print("OR: " + str(left) + ' ' + str(right))
-                return z3.Or(left, right)
+                return " || " + str(values)
         elif ctx.comparator():
             # Handle comparator formula
             left = self.evaluate_values(ctx.values(0))
             right = self.evaluate_values(ctx.values(1))
             comparator = ctx.comparator().getText()
             if comparator == '>=':
-                print(str(left) + ' >= ' + str(right))
-                return z3.is_ge(left >= right)
+                return str(left) + ' >= ' + str(right)
             elif comparator == '<=':
-                print(str(left) + ' <= ' + str(right))
-                return z3.is_le(left <= right)
+                return str(left) + ' <= ' + str(right)
             elif comparator == '<':
-                print(str(left) + ' < ' + str(right))
-                return z3.is_lt(left < right)
+                return str(left) + ' < ' + str(right)
             elif comparator == '>':
-                print(str(left) + ' > ' + str(right))
-                return z3.is_gt(left > right)
+                return str(left) + ' > ' + str(right)
         elif ctx.equal():
             var_name = ctx.ID().getText()
             print("EQUAL var_name: " + str(var_name))
@@ -80,21 +81,6 @@ class Evaluate(MyGrammar2Listener):
             # Handle number
             print("RETURN IN EVALUATE VALUES NUMBER: " + str(z3.Int(ctx.NUMBER().getText())))
             return z3.Int(ctx.NUMBER().getText())
-
-    def enterCheck_sat(self, ctx:MyGrammar2Parser.Check_satContext):
-        # Check the satisfiability of the assertions
-        result = self.solver.check()
-        if result == z3.sat:
-            print("Satisfiable")
-        elif result == z3.unsat:
-            print("Unsatisfiable")
-        else:
-            print("Unknown")
-    
-    def exitGet_model(self, ctx:MyGrammar2Parser.Get_modelContext):
-        model = self.solver.model()
-        for d in model.decls():
-            print(f"{d.name()} = {model[d]}")
 
 def main():
     input_stream = FileStream("test.txt")
