@@ -42,7 +42,7 @@ get_model : '(' 'get-model' ')';
 COMMENT : ';' .*? '\n' -> skip ;
 
 // tokens
+INT_W: 'Int';
 ID : [a-zA-Z]+[a-zA-Z0-9]* ;
 NUMBER : [0-9]+ ;
 WS : [ \t\r\n]+ -> skip ;
-INT_W: 'Int';

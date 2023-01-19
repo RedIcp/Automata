@@ -14,6 +14,7 @@ class Evaluate(MyGrammar2Listener):
         if var_name in self.variables:
             print('*** ERROR in define-const: variable ' + str(var_name) + ' redefined ***')
         else:
+            print('INTEGER: ' + var_name +' = ' + str(value))
             self.variables[var_name] = value
 
     def enterDeclare_fun(self, ctx:MyGrammar2Parser.Declare_funContext):
@@ -21,10 +22,7 @@ class Evaluate(MyGrammar2Listener):
         if var_name in self.variables:
             print('*** ERROR in define-fun: variable ' + str(var_name) + ' redefined ***')
         elif ctx.INT_W():
-            # count = 0
-            # for i in ctx.declare_fun().INT_W():
-            #     count += 1
-            print('FUNCTION: ' + var_name + ' #par= ' + str(len(ctx.declare_fun().INT_W())))
+            print('FUNCTION: ' + var_name + ' #par= ' + str(len(ctx.INT_W())-1))
 
     def enterAssert_cmd(self, ctx:MyGrammar2Parser.Assert_cmdContext):
         formula = self.evaluate_formula(ctx.formula())
@@ -35,13 +33,13 @@ class Evaluate(MyGrammar2Listener):
             # Handle distinct formula
             values = [self.evaluate_values(v) for v in ctx.distinct_formula().values()]
             return "DISTINCT: " + str(values)
-        elif ctx.comp():
+        elif ctx.comp_formula():
             # Handle compound formula
             values = [self.evaluate_formula(f) for f in ctx.comp_formula().formula()]
-            if ctx.comp().getText() == 'and':
-                return " && " + str(values)
+            if ctx.comp_formula().comp().getText() == 'and':
+                return "( && " + str(values) + ' )'
             else:
-                return " || " + str(values)
+                return "( || " + str(values)  + ' )'
         elif ctx.comparator():
             # Handle comparator formula
             left = self.evaluate_values(ctx.values(0))
@@ -55,14 +53,17 @@ class Evaluate(MyGrammar2Listener):
                 return str(left) + ' < ' + str(right)
             elif comparator == '>':
                 return str(left) + ' > ' + str(right)
-        elif ctx.operation():
-            symbol = ctx.operation.getText()
-            values = [self.evaluate_values(v) for v in ctx.operation_dormula().NUMBER()]
+        elif ctx.operation_dormula():
+            symbol = ctx.operation_dormula().operation().getText()
+            #values = [self.evaluate_values(v) for v in ctx.operation_dormula().NUMBER()]
+            values = []
+            for num in ctx.operation_dormula().NUMBER():
+                values.append(num.getText())
             return symbol + str(values)
         elif ctx.equal():
             var_name = ctx.ID().getText()
-            value = ctx.NUMBER().getText()
-            return self.variables[var_name] == value
+            value = self.evaluate_formula(ctx.formula())
+            return '( ' + var_name + ' == ( ' + value + '))'
         else:
             # Handle values
             return self.evaluate_values(ctx.values())
