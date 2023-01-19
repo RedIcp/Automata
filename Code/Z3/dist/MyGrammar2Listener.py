@@ -62,6 +62,24 @@ class MyGrammar2Listener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by MyGrammar2Parser#comp_formula.
+    def enterComp_formula(self, ctx:MyGrammar2Parser.Comp_formulaContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammar2Parser#comp_formula.
+    def exitComp_formula(self, ctx:MyGrammar2Parser.Comp_formulaContext):
+        pass
+
+
+    # Enter a parse tree produced by MyGrammar2Parser#operation_dormula.
+    def enterOperation_dormula(self, ctx:MyGrammar2Parser.Operation_dormulaContext):
+        pass
+
+    # Exit a parse tree produced by MyGrammar2Parser#operation_dormula.
+    def exitOperation_dormula(self, ctx:MyGrammar2Parser.Operation_dormulaContext):
+        pass
+
+
     # Enter a parse tree produced by MyGrammar2Parser#values.
     def enterValues(self, ctx:MyGrammar2Parser.ValuesContext):
         pass

@@ -7,10 +7,6 @@ from dist.MyGrammar2Listener import MyGrammar2Listener
 class Evaluate(MyGrammar2Listener):
     def __init__(self):
         self.variables = {}
-        self.functions = []
-    
-    # TODO: print variable 'Dd' undefined
-    # TODO: print the functions at the end
         
     def enterDeclare_const(self, ctx:MyGrammar2Parser.Declare_constContext):
         var_name = ctx.ID().getText()
@@ -25,7 +21,10 @@ class Evaluate(MyGrammar2Listener):
         if var_name in self.variables:
             print('*** ERROR in define-fun: variable ' + str(var_name) + ' redefined ***')
         elif ctx.INT_W():
-            self.functions.append(var_name)
+            # count = 0
+            # for i in ctx.declare_fun().INT_W():
+            #     count += 1
+            print('FUNCTION: ' + var_name + ' #par= ' + str(len(ctx.declare_fun().INT_W())))
 
     def enterAssert_cmd(self, ctx:MyGrammar2Parser.Assert_cmdContext):
         formula = self.evaluate_formula(ctx.formula())
@@ -38,7 +37,7 @@ class Evaluate(MyGrammar2Listener):
             return "DISTINCT: " + str(values)
         elif ctx.comp():
             # Handle compound formula
-            values = [self.evaluate_formula(f) for f in ctx.formula().values()]
+            values = [self.evaluate_formula(f) for f in ctx.comp_formula().formula()]
             if ctx.comp().getText() == 'and':
                 return " && " + str(values)
             else:
@@ -56,13 +55,14 @@ class Evaluate(MyGrammar2Listener):
                 return str(left) + ' < ' + str(right)
             elif comparator == '>':
                 return str(left) + ' > ' + str(right)
+        elif ctx.operation():
+            symbol = ctx.operation.getText()
+            values = [self.evaluate_values(v) for v in ctx.operation_dormula().NUMBER()]
+            return symbol + str(values)
         elif ctx.equal():
             var_name = ctx.ID().getText()
-            print("EQUAL var_name: " + str(var_name))
-            value = z3.Int(ctx.NUMBER().getText())
-            print("EQUAL value: " + str(value))
-            print("RETURN IN EQUAL ID: " + str(self.variables[var_name] == value))
-            return z3.is_eq(self.variables[var_name] == value)
+            value = ctx.NUMBER().getText()
+            return self.variables[var_name] == value
         else:
             # Handle values
             return self.evaluate_values(ctx.values())
@@ -73,14 +73,12 @@ class Evaluate(MyGrammar2Listener):
             id_text = ctx.ID().getText()
             if id_text in self.variables:
                 # Return a function call if the identifier is a declared function
-                print("RETURN IN EVALUATE VALUES ID: " + str(self.variables[id_text]))
                 return self.variables[id_text]
             else:
-                raise ValueError(f"VAL: '{ctx.getText()}' not declared.")
+                print("*** ERROR in assert: variable " + str(id_text) + " undefined ***")
         elif ctx.NUMBER():
             # Handle number
-            print("RETURN IN EVALUATE VALUES NUMBER: " + str(z3.Int(ctx.NUMBER().getText())))
-            return z3.Int(ctx.NUMBER().getText())
+            return ctx.NUMBER().getText()
 
 def main():
     input_stream = FileStream("test.txt")

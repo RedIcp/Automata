@@ -13,12 +13,16 @@ assert_cmd : '(' 'assert' formula ')';
 
 distinct_formula : '(' 'distinct' values values values*')' ;
 
+comp_formula: '(' comp formula formula formula* ')';
+
+operation_dormula: '(' operation NUMBER NUMBER NUMBER* ')';
+
 values: (ID | NUMBER);
 
 formula : distinct_formula
-        | '(' comp formula formula formula* ')'
+        | comp_formula
         | '(' comparator values values ')'
-        | '(' operation NUMBER NUMBER NUMBER* ')'
+        | operation_dormula
         | '(' equal ID formula ')'
         | values
         ;

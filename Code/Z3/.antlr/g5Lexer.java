@@ -1,4 +1,4 @@
-// Generated from /Users/javiercanto/Desktop/Fontys_Automata/Code/Z3/MyGrammar3.g4 by ANTLR 4.9.2
+// Generated from /Users/javiercanto/Desktop/Fontys_Automata/Code/Z3/g5.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class MyGrammar3Lexer extends Lexer {
+public class g5Lexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -86,13 +86,13 @@ public class MyGrammar3Lexer extends Lexer {
 	}
 
 
-	public MyGrammar3Lexer(CharStream input) {
+	public g5Lexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "MyGrammar3.g4"; }
+	public String getGrammarFileName() { return "g5.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

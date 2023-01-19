@@ -1,4 +1,4 @@
-// Generated from /Users/javiercanto/Desktop/Fontys_Automata/Code/Z3/MyGrammar2.g4 by ANTLR 4.9.2
+// Generated from /Users/javiercanto/Desktop/Fontys_Automata/Code/Z3/g5.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class MyGrammar2Parser extends Parser {
+public class g5Parser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -84,7 +84,7 @@ public class MyGrammar2Parser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "MyGrammar2.g4"; }
+	public String getGrammarFileName() { return "g5.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -95,7 +95,7 @@ public class MyGrammar2Parser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public MyGrammar2Parser(TokenStream input) {
+	public g5Parser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -225,10 +225,10 @@ public class MyGrammar2Parser extends Parser {
 	}
 
 	public static class Declare_funContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(MyGrammar2Parser.ID, 0); }
-		public List<TerminalNode> INT_W() { return getTokens(MyGrammar2Parser.INT_W); }
+		public TerminalNode ID() { return getToken(g5Parser.ID, 0); }
+		public List<TerminalNode> INT_W() { return getTokens(g5Parser.INT_W); }
 		public TerminalNode INT_W(int i) {
-			return getToken(MyGrammar2Parser.INT_W, i);
+			return getToken(g5Parser.INT_W, i);
 		}
 		public Declare_funContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -285,9 +285,9 @@ public class MyGrammar2Parser extends Parser {
 	}
 
 	public static class Declare_constContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(MyGrammar2Parser.ID, 0); }
-		public TerminalNode INT_W() { return getToken(MyGrammar2Parser.INT_W, 0); }
-		public TerminalNode NUMBER() { return getToken(MyGrammar2Parser.NUMBER, 0); }
+		public TerminalNode ID() { return getToken(g5Parser.ID, 0); }
+		public TerminalNode INT_W() { return getToken(g5Parser.INT_W, 0); }
+		public TerminalNode NUMBER() { return getToken(g5Parser.NUMBER, 0); }
 		public Declare_constContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -483,9 +483,9 @@ public class MyGrammar2Parser extends Parser {
 		public OperationContext operation() {
 			return getRuleContext(OperationContext.class,0);
 		}
-		public List<TerminalNode> NUMBER() { return getTokens(MyGrammar2Parser.NUMBER); }
+		public List<TerminalNode> NUMBER() { return getTokens(g5Parser.NUMBER); }
 		public TerminalNode NUMBER(int i) {
-			return getToken(MyGrammar2Parser.NUMBER, i);
+			return getToken(g5Parser.NUMBER, i);
 		}
 		public Operation_dormulaContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -538,8 +538,8 @@ public class MyGrammar2Parser extends Parser {
 	}
 
 	public static class ValuesContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(MyGrammar2Parser.ID, 0); }
-		public TerminalNode NUMBER() { return getToken(MyGrammar2Parser.NUMBER, 0); }
+		public TerminalNode ID() { return getToken(g5Parser.ID, 0); }
+		public TerminalNode NUMBER() { return getToken(g5Parser.NUMBER, 0); }
 		public ValuesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -598,7 +598,7 @@ public class MyGrammar2Parser extends Parser {
 		public EqualContext equal() {
 			return getRuleContext(EqualContext.class,0);
 		}
-		public TerminalNode ID() { return getToken(MyGrammar2Parser.ID, 0); }
+		public TerminalNode ID() { return getToken(g5Parser.ID, 0); }
 		public FormulaContext formula() {
 			return getRuleContext(FormulaContext.class,0);
 		}
