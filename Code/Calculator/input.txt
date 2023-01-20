@@ -1,48 +1,14 @@
-function float add(float x, int y) {
+function float add(float x, float y) {
     return x + y;
 }
 
-float a = 5.5;
-int b = 13; 
-float c = b - a;
 
-print(c);
-print(add(a, b));
-print(add(2, 3));
-print(add(2, 3)+add(2,3));
-
-function float divide(int z, int e) {
-    if(z > e) {
-        return z/e;
-    }
-    else {
-        return e/z;
-    }
+function float divide(float z, float e) {
+    return z/e;
 }
 
-print(divide(5, add(5,5.5)));
 
-int i = 0;
-while(i < 5) {
-    i = i + 1;
-    print(i); 
-}
+print(divide(6,add(2,2)));
+print(add(4, divide(4, divide(4,2))));
+print(divide(30, add(5, divide(100, 2))));
 
-int j = 0;
-while(j < 5) {
-    j = j + 1;
-    float t = add(divide(20, 10-5), 1000);
-    if(t > 5){
-        print("t is greater than 5");
-        print(t);
-    }
-}
-
-int lk = 5%2;
-print(lk);
-
-float mad = 100-(50*(20+(10/3)));
-print(mad);
-
-int ma = 100-(50*(20+(10/3)));
-print(ma);

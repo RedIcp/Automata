@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="03e9bdc0-3336-419b-95b5-6e4168964f05" name="Changes" comment="" />
+    <list default="true" id="03e9bdc0-3336-419b-95b5-6e4168964f05" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Z3/.antlr/MyGrammar2.interp" beforeDir="false" afterPath="$PROJECT_DIR$/../Z3/.antlr/MyGrammar2.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Z3/.antlr/MyGrammar2Lexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/../Z3/.antlr/MyGrammar2Lexer.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Z3/.antlr/MyGrammar2Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Z3/.antlr/MyGrammar2Lexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Z3/.antlr/MyGrammar2Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Z3/.antlr/MyGrammar2Parser.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +44,7 @@
       <option name="presentableId" value="Default" />
       <updated>1673351342635</updated>
       <workItem from="1673351358312" duration="519000" />
+      <workItem from="1674149375389" duration="138000" />
     </task>
     <servers />
   </component>

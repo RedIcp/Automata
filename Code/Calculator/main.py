@@ -126,11 +126,16 @@ class Evaluate(MyGrammarVisitor):
                 i += 1
 
         if func.return_type == 'int':
-            return int(float(self.visit(func.block)))
+            v = int(float(self.visit(func.block)))
         elif func.return_type == 'float':
-            return float(self.visit(func.block))
+            v = float(self.visit(func.block))
         else:
-            return None
+            v = None
+
+        for i, param in enumerate(func.parameters):
+            del variables[parameters[i][1]]
+        
+        return v
 
     def visitPrint_statement(self, ctx:MyGrammarParser.Print_statementContext):
         value = self.visit(ctx.expression())
@@ -182,69 +187,69 @@ class Evaluate(MyGrammarVisitor):
             condition = self.visit(ctx.expression())
 
     def visitCalculation(self, ctx:MyGrammarParser.CalculationContext):
-        if ctx.expression():
-            values = []
-            for expr in ctx.expression():
-                value = self.visit(expr)
-                if not str(value).replace('.', '', 1).isdigit():
-                    if value in variables:
-                        var = variables[value]
-                        if var.return_type == 'int':
-
-                            values.append(int(float(var.value)))
-                        else:
-                            values.append(float(var.value))
-                    else:
-                        print("No variable found with " + str(value) + " id")
-                        return
-                elif value == None:
-                    print(str(value) + " variable is not assigned with numbers")
-                    return
-                else:    
-                    values.append(float(value))
-            if ctx.PLUS():
-                return values[0] + values[1]
-            elif ctx.MINUS():
-                return values[0] - values[1]
-            elif ctx.MULTIPLY():
-                result = 1
-                for val in values:
-                    result *= val
-                return result
-            elif ctx.DIVIDE():
-                result = values[0]
-                for val in values[1:]:
-                    result /= val
-                return result
-            elif ctx.MODULO():
-                result = values[0]
-                for val in values[1:]:
-                    result %= val
-                return result
-            elif ctx.EQUALS():
-                return values[0] == values[1]
-            elif ctx.NOT_EQUALS():
-                return values[0] != values[1]
-            elif ctx.GREATER_THAN():
-                return values[0] > values[1]
-            elif ctx.LESS_THAN():
-                return values[0] < values[1]
-            elif ctx.GREATER_THAN_EQUALS():
-                return values[0] >= values[1]
-            elif ctx.LESS_THAN_EQUALS():
-                return values[0] <= values[1]
-            elif ctx.AND():
-                result = True
-                for val in values:
-                    result = result and val
-                return result
-            elif ctx.OR():
-                result = False
-                for val in values:
-                    result = result or val
-                return result
+        l = self.visit(ctx.expression(0))
+        r = self.visit(ctx.expression(1))
+        if not str(l).replace('.', '', 1).isdigit():
+            if l in variables:
+                l = variables[l]
+                if l.return_type == 'int':
+                    l = int(float(l.value))
+                else:
+                    l = float(l.value)
             else:
-                return None
+                print("No variable found with " + str(l) + " id")
+                return
+        elif l == None:
+            print(str(l) + " variable is not assigned with numbers")
+            return
+        else:
+            l = float(l)
+
+        if not str(r).replace('.', '', 1).isdigit():
+            if r in variables:
+                r = variables[r]
+                if r.return_type == 'int':
+                    r = int(float(r.value))
+                else:
+                    r = float(r.value)
+            else:
+                print("No variable found with " + str(r) + " id")
+                return
+        elif r == None:
+            print(str(r) + " variable is not assigned with numbers")
+            return
+        else:
+            r = float(r)
+            
+        if ctx.PLUS():
+            return l + r
+        elif ctx.MINUS():
+            return l - r
+        elif ctx.MULTIPLY():
+            return l * r
+        elif ctx.DIVIDE():
+            return l / r
+        elif ctx.MODULO():
+            return l % r
+        elif ctx.EQUALS():
+            return l == r
+        elif ctx.NOT_EQUALS():
+            return l != r
+        elif ctx.GREATER_THAN():
+            return l > r
+        elif ctx.LESS_THAN():
+            return l < r
+        elif ctx.GREATER_THAN_EQUALS():
+            return l >= r
+        elif ctx.LESS_THAN_EQUALS():
+            return l <= r
+        elif ctx.AND():
+            return l and r
+        elif ctx.OR():
+            return l or r
+        else:
+            return None    
+        
 
     def visitParens(self, ctx:MyGrammarParser.ParensContext):
         return self.visit(ctx.expression())
